@@ -1,0 +1,75 @@
+.login-card {
+    display: flex;
+    padding: 48px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px !important;
+    background: #FFF;
+    box-shadow: 2px 2px 55.4px 0 rgba(0, 0, 0, 0.05) !important;
+    z-index: 3;
+    text-align: center;
+}
+
+.logo-section {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.login-title {
+    color: var(--neutral-neutral-800, #424242) !important;
+    font-family: "Open Sans" !important;
+    font-size: 18px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    margin-top: 10px !important;
+    line-height: 24px !important; 
+    text-align: center;
+
+
+}
+
+.login-subtitle {
+    font-size: 14px !important;
+    color: #777;
+    margin-bottom: 20px !important;
+    text-align: center;
+}
+
+.input-field {
+    margin-bottom: 18px !important;
+    width: 100%;
+}
+
+.input-field .MuiOutlinedInput-root {
+    height: 45px;
+    border-radius: 6px;
+}
+
+.login-button {
+    color: white !important;
+    font-weight: 600 !important;
+    height: 45px;
+    text-transform: none !important;
+    margin-bottom: 16px !important;
+    border-radius: 4px !important;
+    background: var(--primary-primary-900, #01579B) !important;
+    width: 100%;
+}
+
+.login-button:hover {
+    background-color: #084298 !important;
+}
+
+.language-select {
+    font-size: 14px !important;
+    color: #555;
+    text-align: center;
+    width: 40%;
+}
+
+.language-select .MuiSelect-select {
+    text-align: center;
+}
