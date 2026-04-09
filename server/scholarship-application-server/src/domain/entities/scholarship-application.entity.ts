@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToOne } from 'typeorm';
+import { PersonalDetail } from './personal-detail.entity';
 
 export enum NotificationLanguage {
     ENGLISH = 'ENGLISH',
@@ -16,7 +17,10 @@ export enum Status {
 
 @Entity('scholarship_applications')
 export class ScholarshipApplication{
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column({ unique: true })
     uuid: string;
 
     @Column({ unique: true })
@@ -68,5 +72,8 @@ export class ScholarshipApplication{
 
     @Column({default:false})
     summary_sent_to_advisor: boolean
+
+    @OneToOne(() => PersonalDetail, (pd) => pd.scholarshipApplication)
+    personalDetail: PersonalDetail;
 
 }

@@ -3,8 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from "dotenv"
-import { loginModule } from './feature/login/login.module';
+import { LoginModule } from './feature/login/login.module';
 import { ScholarshipApplication } from './domain/entities/scholarship-application.entity';
+import { PersonalDetailModule } from './feature/application-deatial/application-detail.module';
+import { PersonalDetail } from './domain/entities/personal-detail.entity';
 
 config()
 
@@ -17,10 +19,11 @@ config()
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [ScholarshipApplication],
+      entities: [ScholarshipApplication,PersonalDetail],
       synchronize: false,
     }),
-    loginModule
+    LoginModule,
+    PersonalDetailModule
   ],
   controllers: [AppController],
   providers: [AppService],

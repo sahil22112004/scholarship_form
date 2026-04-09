@@ -8,9 +8,15 @@ export class ApplicationsTableMigration1775545542349 implements MigrationInterfa
                 name: "scholarship_applications",
                 columns: [
                     {
+                        name: "id",
+                        type: "int",
+                        isPrimary: true,
+                        isGenerated: true,
+                        generationStrategy: "increment"
+                    },
+                    {
                         name: "uuid",
                         type: "uuid",
-                        isPrimary: true,
                         generationStrategy: "uuid",
                         default: "uuid_generate_v4()",
                     },

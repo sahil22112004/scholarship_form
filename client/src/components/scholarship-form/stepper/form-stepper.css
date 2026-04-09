@@ -1,0 +1,93 @@
+.stepper-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-label {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center;
+}
+
+.step-label .MuiStepLabel-iconContainer {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 6px;
+}
+
+.step-label .MuiStepLabel-labelContainer {
+  text-align: center;
+}
+
+.step-label .MuiStepLabel-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: #999;
+  margin-top: 2px;
+}
+
+.step-label.active-label .MuiStepLabel-label {
+  font-weight: 600;
+  color: #0056b3;
+}
+
+.step-icon {
+  background: #BDBDBD;
+  z-index: 1;
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.step-icon.active {
+  background-color: #0056b3;
+}
+
+.step-icon.completed {
+  background-color: #0056b3;
+}
+
+.custom-connector {
+  margin-left: 0 !important;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-connector .MuiStepConnector-line {
+  border-left: 2px solid #eaeaf0;
+  min-height: 70px;
+}
+
+.custom-connector.Mui-active .MuiStepConnector-line {
+  border-color: #0056b3;
+}
+
+.custom-connector.Mui-completed .MuiStepConnector-line {
+  border-color: #0056b3;
+}
+
+/* .MuiStepConnector-root {
+  margin-left: 0 !important;
+  left: calc(50% - 1px);
+  position: relative;
+} */
+
+/* Align everything properly */
+/* .MuiStep-root {
+  align-items: center !important;
+} */
