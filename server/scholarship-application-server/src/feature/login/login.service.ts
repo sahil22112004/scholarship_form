@@ -6,7 +6,6 @@ import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
 
-
 @Injectable()
 export class loginApplicantService {
     constructor(
@@ -15,11 +14,12 @@ export class loginApplicantService {
         private scholarshipApplicationRepository: Repository<ScholarshipApplication>,
         private readonly httpService: HttpService,
         private readonly jwtService: JwtService,
-    ) {}
+    ) { }
 
     async loginApplicant(token: string) {
         const applicationForm = await this.scholarshipApplicationRepository.findOne({
-            where: { token }
+            where: { token },
+            relations: ['personalDetail'],
         });
 
         if (!applicationForm) {
@@ -28,16 +28,19 @@ export class loginApplicantService {
 
         const applicantUuid = applicationForm.applicant_uuid;
 
-        const response :any = await firstValueFrom(
+        const response: any = await firstValueFrom(
             this.httpService.get(`http://localhost:4000/applicant/${applicantUuid}`)
         );
 
         const applicantData = response.data.applicant;
         const access_token = await this.jwtService.signAsync(applicantData);
 
+        const { personalDetail, ...applicationWithoutPersonal } = applicationForm;
+
         return {
             message: 'Application Fetch Successfully',
-            applicationForm,
+            applicationForm: applicationWithoutPersonal,
+            personalDetail: personalDetail?.content || null,
             applicant: applicantData,
             access_token
         };

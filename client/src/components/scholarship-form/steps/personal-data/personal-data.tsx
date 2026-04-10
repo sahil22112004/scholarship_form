@@ -1,6 +1,8 @@
 'use client'
 
 import React from 'react';
+import { useEffect, useState } from 'react';
+import { Country, State, City } from 'country-state-city';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -24,23 +26,34 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs from 'dayjs';
-import { personalSchema } from '../../../validation/personalSchema';
+import { personalSchema, personalInterface } from '../../../validation/personalSchema';
 import './personal-data.css';
+import Tooltip from '@mui/material/Tooltip';
+import { useAppDispatch, useAppSelector } from '@/hooks/use-redux-hook';
+import { createPersonalDetailThunk } from '@/store/features/scholarshipform/scholarshipform-api';
+
 
 interface PersonalDataProps {
     onContinue: (data: any) => void;
     onBack: () => void;
-    onCancel: () => void;
     savedData?: any;
+    setCancelModal: React.Dispatch<React.SetStateAction<boolean>>;
+    cancelModal: boolean
 }
 
-const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCancel, savedData }) => {
-    const { control, handleSubmit, watch, formState: { errors } } = useForm({
+const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCancelModal, cancelModal, savedData }) => {
+    const dispatch = useAppDispatch();
+    const { ScholarshipForm, PersonalDetail } = useAppSelector((state) => state.scholarshipform)
+    console.log("personak data is ", PersonalDetail)
+
+
+
+
+    const { control, handleSubmit, setValue, watch, reset, getValues, formState: { errors } } = useForm<personalInterface>({
         resolver: zodResolver(personalSchema),
-        defaultValues: savedData || {
+        defaultValues: PersonalDetail || savedData || {
             documentType: '',
             documentNumber: '',
-            gender: '',
             maritalStatus: '',
             profession: '',
             dob: '',
@@ -60,8 +73,71 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
     });
 
     const hasChildren = watch('hasChildren');
+    const selectedCountry = watch('country');
+    const selectedState = watch('state');
+
+    const [countries, setCountries] = useState<any[]>([]);
+    const [states, setStates] = useState<any[]>([]);
+    const [cities, setCities] = useState<any[]>([]);
+
+
+    useEffect(() => {
+        setCountries(Country.getAllCountries());
+    }, []);
+
+    useEffect(() => {
+        if (PersonalDetail && !savedData) {
+            reset(PersonalDetail);
+        }
+    }, [PersonalDetail, savedData, reset]);
+
+    useEffect(() => {
+        if (selectedCountry) {
+            const statesData = State.getStatesOfCountry(selectedCountry);
+            setStates(statesData);
+
+            // Only clear state/city if the current values are not valid for this country
+            const currentState = getValues('state');
+            if (currentState && !statesData.find(s => s.isoCode === currentState)) {
+                setValue('state', '');
+                setValue('city', '');
+                setCities([]);
+            }
+        } else {
+            setStates([]);
+            setCities([]);
+        }
+    }, [selectedCountry, setValue, getValues]);
+
+    useEffect(() => {
+        if (selectedCountry && selectedState) {
+            const citiesData = City.getCitiesOfState(selectedCountry, selectedState);
+            setCities(citiesData);
+
+            // Only clear city if the current value is not valid for this state
+            const currentCity = getValues('city');
+            if (currentCity && !citiesData.find(c => c.name === currentCity)) {
+                setValue('city', '');
+            }
+        } else {
+            setCities([]);
+        }
+    }, [selectedCountry, selectedState, setValue, getValues]);
+
+
 
     const onSubmit = (data: any) => {
+        if (!ScholarshipForm) {
+            console.log('no application selected ')
+            return
+        }
+        const content = {
+            application_uuid: ScholarshipForm.id,
+            content: data
+        }
+        dispatch(createPersonalDetailThunk(content))
+
+        console.log(data)
         onContinue(data);
     };
 
@@ -121,29 +197,6 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                 <div className="form-row">
                     <div className="form-col">
                         <Controller
-                            name="gender"
-                            control={control}
-                            render={({ field }) => (
-                                <FormControl fullWidth error={!!errors.gender} variant="outlined" className="linkedin-input-container">
-                                    <InputLabel id="gender-label">Gender</InputLabel>
-                                    <Select
-                                        {...field}
-                                        labelId="gender-label"
-                                        id="gender-select"
-                                        label="Gender"
-                                    >
-                                        <MenuItem value="Male">Male</MenuItem>
-                                        <MenuItem value="Female">Female</MenuItem>
-                                        <MenuItem value="Non-binary">Non-binary</MenuItem>
-                                        <MenuItem value="Prefer not to say">Prefer not to say</MenuItem>
-                                    </Select>
-                                    {errors.gender && <FormHelperText>{errors.gender.message as string}</FormHelperText>}
-                                </FormControl>
-                            )}
-                        />
-                    </div>
-                    <div className="form-col">
-                        <Controller
                             name="maritalStatus"
                             control={control}
                             render={({ field }) => (
@@ -166,30 +219,25 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                             )}
                         />
                     </div>
-                </div>
-                <div className="form-row">
                     <div className="form-col" style={{ maxWidth: '49.5%' }}>
                         <Controller
                             name="profession"
                             control={control}
                             render={({ field }) => (
-                                <FormControl fullWidth error={!!errors.profession} variant="outlined" className="linkedin-input-container">
-                                    <InputLabel id="profession-label">Profession / Occupation</InputLabel>
-                                    <Select
-                                        {...field}
-                                        labelId="profession-label"
-                                        id="profession-select"
-                                        label="Profession / Occupation"
-                                    >
-                                        <MenuItem value="Student">Student</MenuItem>
-                                        <MenuItem value="Employed">Employed</MenuItem>
-                                        <MenuItem value="Self-employed">Self-employed</MenuItem>
-                                        <MenuItem value="Unemployed">Unemployed</MenuItem>
-                                        <MenuItem value="Retired">Retired</MenuItem>
-                                        <MenuItem value="Other">Other</MenuItem>
-                                    </Select>
-                                    {errors.profession && <FormHelperText>{errors.profession.message as string}</FormHelperText>}
-                                </FormControl>
+                                <TextField
+                                    {...field}
+                                    fullWidth
+                                    label="Profession / Occupation"
+                                    placeholder="Enter profession"
+                                    variant="outlined"
+                                    className="linkedin-input-container"
+                                    error={!!errors.profession}
+                                    helperText={errors.profession?.message as string}
+                                    onChange={(e) => {
+                                        const value = e.target.value.replace(/[^A-Za-z\s]/g, '');
+                                        field.onChange(value);
+                                    }}
+                                />
                             )}
                         />
                     </div>
@@ -205,35 +253,33 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                             control={control}
                             render={({ field: { onChange, value, ...restField } }) => (
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DemoContainer components={['DateField']} sx={{ pt: 0 }}>
-                                        <DateField
-                                            {...restField}
-                                            label="Date of birth"
-                                            value={value ? dayjs(value) : null}
-                                            onChange={(newValue) => {
-                                                onChange(newValue ? (newValue as any).format('YYYY-MM-DD') : '');
-                                            }}
-                                            format="DD/MM/YYYY"
-                                            slotProps={{
-                                                textField: {
-                                                    error: !!errors.dob,
-                                                    helperText: errors.dob?.message as string,
-                                                    fullWidth: true,
-                                                    variant: 'outlined',
-                                                    className: "linkedin-input-container",
-                                                    slotProps: {
-                                                        input: {
-                                                            endAdornment: (
-                                                                <InputAdornment position="end">
-                                                                    <CalendarTodayOutlinedIcon sx={{ color: '#777676', fontSize: '18px' }} />
-                                                                </InputAdornment>
-                                                            ),
-                                                        },
+                                    <DateField
+                                        {...restField}
+                                        label="Date of birth"
+                                        value={value ? dayjs(value) : null}
+                                        onChange={(newValue) => {
+                                            onChange(newValue ? (newValue as any).format('YYYY-MM-DD') : '');
+                                        }}
+                                        format="DD/MM/YYYY"
+                                        slotProps={{
+                                            textField: {
+                                                error: !!errors.dob,
+                                                helperText: errors.dob?.message as string,
+                                                fullWidth: true,
+                                                variant: 'outlined',
+                                                className: "linkedin-input-container dob-field",
+                                                slotProps: {
+                                                    input: {
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                <CalendarTodayOutlinedIcon sx={{ color: '#777676', fontSize: '18px' }} />
+                                                            </InputAdornment>
+                                                        ),
                                                     },
                                                 },
-                                            }}
-                                        />
-                                    </DemoContainer>
+                                            },
+                                        }}
+                                    />
                                 </LocalizationProvider>
                             )}
                         />
@@ -251,8 +297,11 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                                         id="country-select"
                                         label="Country"
                                     >
-                                        <MenuItem value="Country 1">Country 1</MenuItem>
-                                        <MenuItem value="Country 2">Country 2</MenuItem>
+                                        {countries.map((c) => (
+                                            <MenuItem key={c.isoCode} value={c.isoCode}>
+                                                {c.name}
+                                            </MenuItem>
+                                        ))}
                                     </Select>
                                     {errors.country && <FormHelperText>{errors.country.message as string}</FormHelperText>}
                                 </FormControl>
@@ -273,8 +322,13 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                                         labelId="state-label"
                                         id="state-select"
                                         label="Province/State"
+                                        disabled={!selectedCountry}
                                     >
-                                        <MenuItem value="State 1">State 1</MenuItem>
+                                        {states.map((s) => (
+                                            <MenuItem key={s.isoCode} value={s.isoCode}>
+                                                {s.name}
+                                            </MenuItem>
+                                        ))}
                                     </Select>
                                     {errors.state && <FormHelperText>{errors.state.message as string}</FormHelperText>}
                                 </FormControl>
@@ -293,8 +347,13 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                                         labelId="city-label"
                                         id="city-select"
                                         label="City"
+                                        disabled={!selectedState}
                                     >
-                                        <MenuItem value="City 1">City 1</MenuItem>
+                                        {cities.map((c) => (
+                                            <MenuItem key={c.name} value={c.name}>
+                                                {c.name}
+                                            </MenuItem>
+                                        ))}
                                     </Select>
                                     {errors.city && <FormHelperText>{errors.city.message as string}</FormHelperText>}
                                 </FormControl>
@@ -316,7 +375,12 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                                         id="nationality-select"
                                         label="Nationality"
                                     >
-                                        <MenuItem value="Nationality 1">Nationality 1</MenuItem>
+                                        {countries.map((c) => (
+                                            <MenuItem key={c.isoCode} value={c.isoCode}>
+                                                {c.name}
+                                            </MenuItem>
+                                        ))}
+                                        {/* <MenuItem value="Nationality 1">Nationality 1</MenuItem> */}
                                     </Select>
                                     {errors.nationality && <FormHelperText>{errors.nationality.message as string}</FormHelperText>}
                                 </FormControl>
@@ -343,12 +407,19 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                                     className="linkedin-input-container"
                                     error={!!errors.income}
                                     helperText={errors.income?.message as string}
+                                    onChange={(e) => {
+                                        const value = e.target.value.replace(/[^0-9.,]/g, '');
+                                        field.onChange(value);
+                                    }}
                                     slotProps={{
                                         input: {
                                             endAdornment: (
                                                 <InputAdornment position="end">
                                                     <IconButton size="small">
-                                                        <HelpOutlineOutlinedIcon fontSize="small" sx={{ color: '#9E9E9E' }} />
+                                                        <Tooltip
+                                                            title="Estimated monthly income of the household">
+                                                            <HelpOutlineOutlinedIcon fontSize="small" sx={{ color: '#9E9E9E' }} />
+                                                        </Tooltip>
                                                     </IconButton>
                                                 </InputAdornment>
                                             ),
@@ -372,12 +443,19 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                                     className="linkedin-input-container"
                                     error={!!errors.expense}
                                     helperText={errors.expense?.message as string}
+                                    onChange={(e) => {
+                                        const value = e.target.value.replace(/[^0-9.,]/g, '');
+                                        field.onChange(value);
+                                    }}
                                     slotProps={{
                                         input: {
                                             endAdornment: (
                                                 <InputAdornment position="end">
                                                     <IconButton size="small">
-                                                        <HelpOutlineOutlinedIcon fontSize="small" sx={{ color: '#9E9E9E' }} />
+                                                        <Tooltip
+                                                            title="Estimated monthly expense of the household">
+                                                            <HelpOutlineOutlinedIcon fontSize="small" sx={{ color: '#9E9E9E' }} />
+                                                        </Tooltip>
                                                     </IconButton>
                                                 </InputAdornment>
                                             ),
@@ -436,6 +514,11 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                                             variant="outlined"
                                             className="linkedin-input-container"
                                             error={!!errors.children0to4}
+                                            helperText={errors.children0to4?.message as string}
+                                            onChange={(e) => {
+                                                const value = e.target.value.replace(/[^0-9]/g, '');
+                                                field.onChange(value);
+                                            }}
                                         />
                                     )}
                                 />
@@ -453,6 +536,11 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                                             variant="outlined"
                                             className="linkedin-input-container"
                                             error={!!errors.children5to12}
+                                            helperText={errors.children5to12?.message as string}
+                                            onChange={(e) => {
+                                                const value = e.target.value.replace(/[^0-9]/g, '');
+                                                field.onChange(value);
+                                            }}
                                         />
                                     )}
                                 />
@@ -470,6 +558,11 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                                             variant="outlined"
                                             className="linkedin-input-container"
                                             error={!!errors.children13to18}
+                                            helperText={errors.children13to18?.message as string}
+                                            onChange={(e) => {
+                                                const value = e.target.value.replace(/[^0-9]/g, '');
+                                                field.onChange(value);
+                                            }}
                                         />
                                     )}
                                 />
@@ -487,6 +580,11 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
                                             variant="outlined"
                                             className="linkedin-input-container"
                                             error={!!errors.children18plus}
+                                            helperText={errors.children18plus?.message as string}
+                                            onChange={(e) => {
+                                                const value = e.target.value.replace(/[^0-9]/g, '');
+                                                field.onChange(value);
+                                            }}
                                         />
                                     )}
                                 />
@@ -500,7 +598,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, onCance
             <div className="personal-form-footer">
                 <button type="button" className="btn-secondary" onClick={onBack}>BACK</button>
                 <div className="footer-actions-right">
-                    <button type="button" className="btn-secondary" onClick={onCancel}>CANCEL</button>
+                    <button type="button" className="btn-secondary" onClick={() => setCancelModal(true)}>CANCEL</button>
                     <button type="submit" className="btn-primary">CONTINUE</button>
                 </div>
             </div>

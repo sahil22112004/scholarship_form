@@ -6,8 +6,9 @@ import { consumeCommand } from "../cli/consumerCommand";
 import { config } from "dotenv";
 import { Inbox } from "../../../domain/entities/inbox.entity";
 import { ScholarshipApplication } from "../../../domain/entities/scholarship-application.entity";
-import { CreateApplicationService } from "../../../feature/create-application/createAppplication.service";
+import { CreateApplicationService } from "../../../feature//application-deatial/create-application/createAppplication.service";
 import { SendMailModule } from "../../node-mailer/sendMail.module";
+import { PersonalDetail } from "../../../domain/entities/personal-detail.entity";
 
 config()
 
@@ -21,7 +22,7 @@ config()
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Inbox,ScholarshipApplication],
+      entities: [Inbox,ScholarshipApplication,PersonalDetail],
       synchronize: false,
     }),
     SendMailModule

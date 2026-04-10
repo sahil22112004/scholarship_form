@@ -31,7 +31,6 @@ const authSlice = createSlice({
                 state.error = null;
             })
             .addCase(loginWithTokenApi.fulfilled, (state, action) => {
-                console.log("action is ",action.payload)
                 state.loading = false;
                 state.isLoggedIn = true;
                 state.currentUser = action.payload.applicant;

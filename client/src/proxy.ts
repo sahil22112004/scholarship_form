@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
  
 const protectedRoutes = [
-  '/scholarship-intro'
-
+  '/scholarship-intro',
+  '/scholarship-form-application'
 ]
 const publicRoutes = ['/']
  

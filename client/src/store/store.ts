@@ -12,6 +12,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./features/auth/auth-slice";
+import scholarshipformReducer from "./features/scholarshipform/scholarshipform-slice"
 
 
 
@@ -19,13 +20,14 @@ import authReducer from "./features/auth/auth-slice";
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["auth"],
+    whitelist: ["auth","scholarshipform"],
 };
 
 const persistedReducer = persistReducer(
     persistConfig,
     combineReducers({
-        auth: authReducer
+        auth: authReducer,
+        scholarshipform: scholarshipformReducer
     })
 );
 

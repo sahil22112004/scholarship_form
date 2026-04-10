@@ -2,7 +2,7 @@ import { Injectable, OnModuleInit } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { RabbitMQConnection } from "../rabbitMq.connection";
-import { CreateApplicationService } from "../../../feature/create-application/createAppplication.service";
+import { CreateApplicationService } from "../../../feature/application-deatial/create-application/createAppplication.service";
 import { Inbox } from "../../../domain/entities/inbox.entity";
 
 @Injectable()

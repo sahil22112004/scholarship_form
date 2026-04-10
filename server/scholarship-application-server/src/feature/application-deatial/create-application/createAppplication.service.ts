@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
-import { ScholarshipApplication } from "../../domain/entities/scholarship-application.entity"
-import { SendMailService } from "../../infrastructure/node-mailer/sendMail.service"
+import { ScholarshipApplication } from "../../../domain/entities/scholarship-application.entity"
+import { SendMailService } from "../../../infrastructure/node-mailer/sendMail.service"
 
 @Injectable()
 export class CreateApplicationService {

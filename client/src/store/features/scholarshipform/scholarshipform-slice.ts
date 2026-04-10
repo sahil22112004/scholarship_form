@@ -6,6 +6,7 @@ import { Scholarship } from './scholarshipform-type'
 
 const initialState: Scholarship = {
     ScholarshipForm: null,
+    PersonalDetail: null,
     loading: false,
     error: null,
 };
@@ -23,9 +24,10 @@ const ScholarShipFormSlice = createSlice({
                 state.error = null;
             })
             .addCase(loginWithTokenApi.fulfilled, (state, action) => {
-                console.log("action is ",action.payload)
+                console.log("data is ", action.payload)
                 state.loading = false;
                 state.ScholarshipForm = action.payload.applicationForm;
+                state.PersonalDetail = action.payload.personalDetail.content
                 state.error = null;
 
             })
@@ -37,5 +39,5 @@ const ScholarShipFormSlice = createSlice({
     },
 });
 
-export const {  } = ScholarShipFormSlice.actions;
+export const { } = ScholarShipFormSlice.actions;
 export default ScholarShipFormSlice.reducer;

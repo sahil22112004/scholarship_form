@@ -8,14 +8,11 @@ import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlin
 import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import {useAppSelector} from '@/hooks/use-redux-hook'
-
-
-
-
-
+import { useRouter } from "next/navigation";
 
 const ScholarshipIntro = () => {
   const { currentUser } = useAppSelector((state) => state.auth)
+  const router = useRouter()
 
   return (
     <div className="page">
@@ -74,7 +71,7 @@ const ScholarshipIntro = () => {
           </p>
 
           <div className="button-container">
-            <button className="start-btn">START</button>
+            <button className="start-btn" onClick={()=>router.push('/scholarship-form-application')}>START</button>
           </div>
         </div>
       </div>
