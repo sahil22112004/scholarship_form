@@ -7,6 +7,7 @@ import { LoginModule } from './feature/login/login.module';
 import { ScholarshipApplication } from './domain/entities/scholarship-application.entity';
 import { PersonalDetailModule } from './feature/application-deatial/application-detail.module';
 import { PersonalDetail } from './domain/entities/personal-detail.entity';
+import { AddressDetail } from './domain/entities/address-detail.entity';
 
 config()
 
@@ -19,7 +20,7 @@ config()
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [ScholarshipApplication,PersonalDetail],
+      entities: [ScholarshipApplication,PersonalDetail,AddressDetail],
       synchronize: false,
     }),
     LoginModule,

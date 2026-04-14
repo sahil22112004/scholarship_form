@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToOne } from 'typeorm';
 import { PersonalDetail } from './personal-detail.entity';
+import { AddressDetail } from './address-detail.entity';
 
 export enum NotificationLanguage {
     ENGLISH = 'ENGLISH',
@@ -75,5 +76,8 @@ export class ScholarshipApplication{
 
     @OneToOne(() => PersonalDetail, (pd) => pd.scholarshipApplication)
     personalDetail: PersonalDetail;
+
+    @OneToOne(() => AddressDetail, (ad) => ad.scholarshipApplication)
+    addressDetail: AddressDetail;
 
 }

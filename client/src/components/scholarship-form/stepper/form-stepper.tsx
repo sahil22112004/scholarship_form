@@ -3,15 +3,9 @@
 import React from 'react'
 import { Stepper, Step, StepLabel, StepConnector } from '@mui/material'
 import './form-stepper.css'
+import { useTranslation } from 'react-i18next';
 
-const steps = [
-  'Personal',
-  'Addresses',
-  'Academic',
-  'Labor',
-  'References',
-  'Documents'
-]
+
 
 function CustomStepIcon(props: { active?: boolean; completed?: boolean; icon: React.ReactNode }) {
   const { active, completed, icon } = props
@@ -31,6 +25,18 @@ interface FormStepperProps {
 }
 
 const FormStepper: React.FC<FormStepperProps> = ({ activeStep, onStepClick }) => {
+  const { t } = useTranslation()
+
+  const steps = [
+    t('formStepper.steps.personal'),
+    t('formStepper.steps.addresses'),
+    t('formStepper.steps.academic'),
+    t('formStepper.steps.labor'),
+    t('formStepper.steps.references'),
+    t('formStepper.steps.documents'),
+    t('formStepper.steps.Additional')
+  ]
+
   return (
     <Stepper
       activeStep={activeStep}

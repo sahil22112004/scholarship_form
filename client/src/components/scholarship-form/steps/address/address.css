@@ -1,0 +1,134 @@
+.contact-container {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.contact-card {
+    flex: 1;
+    padding: 24px;
+    min-height: 200px;
+    border-radius: 4px;
+    border: 1px solid var(--Neutral-Neutral-300, #E0E0E0);
+    background: var(--Neutral-Neutral-50, #FAFAFA);
+
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.card-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #424242;
+}
+
+.add-button {
+    color: #01579B !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    padding: 0 !important;
+    min-width: unset !important;
+}
+
+.field-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.field-row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    background-color: white;
+}
+
+.input-with-delete {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.delete-btn {
+    padding: 8px !important;
+    margin-top: 4px;
+}
+
+.phone-field-group {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+}
+
+.phone-field-group:focus-within {
+    border-color: #01579B;
+}
+
+.phone-field-group.error {
+    border-color: #d32f2f;
+}
+
+.prefix-box {
+    width: 90px;
+    border-right: 1px solid #E0E0E0;
+}
+
+.prefix-box .MuiOutlinedInput-notchedOutline {
+    border: none !important;
+}
+
+.number-box {
+    flex: 1;
+}
+
+.number-box .MuiOutlinedInput-notchedOutline {
+    border: none !important;
+}
+
+.address-form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #EEEEEE;
+}
+
+.residence-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.full-width-row {
+    grid-column: 1 / -1;
+}
+
+.zip-code-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.optional-tag {
+    font-size: 11px;
+    color: #757575;
+    margin-top: 4px;
+}
+
+.modal-radio-group {
+    padding: 10px 0;
+}
+
+.modal-radio-label {
+    margin-bottom: 8px;
+}

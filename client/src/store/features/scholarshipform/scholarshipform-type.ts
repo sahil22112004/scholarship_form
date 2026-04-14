@@ -41,9 +41,36 @@ export interface ScholarshipFormType {
 
 }
 
+
+
+interface EmailDetail {
+  email: string;
+}
+
+interface PhoneDetail {
+  type: 'phone' | 'whatsapp';
+  prefix: string;
+  number: string;
+}
+
+
+interface addressDetailType {
+  address: string;
+  city: string;
+  country: string;
+  emails: EmailDetail[];
+  housingConditions: "Own" | "Rented" | "Family";
+  housingType: "House" | "Department";
+  phones: PhoneDetail[];
+  state: string;
+  zipCode: string;
+}
+
+
 export interface Scholarship {
   ScholarshipForm: ScholarshipFormType | null;
   PersonalDetail: PersonalDetailType | null;
+  addressDetail: addressDetailType | null
   loading: boolean;
   error: string | null;
 }

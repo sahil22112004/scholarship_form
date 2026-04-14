@@ -1,0 +1,205 @@
+{
+    "login": {
+        "title": "Iniciar sesión",
+        "subtitle": "Introduzca el código de acceso para continuar",
+        "placeholder": "Código de acceso",
+        "button": "INGRESAR",
+        "loading": "cargando",
+        "error_empty": "Este campo no puede estar vacío",
+        "language": {
+            "en": "Inglés (EE. UU.)",
+            "es": "Español (España)"
+        }
+    },
+    "scholarshipIntro": {
+        "greeting": "¡Hola",
+        "title": "Bienvenido al formulario de solicitud de beca en línea",
+        "description_1": "Al completar este formulario comenzarás el proceso de solicitud para nuestro programa internacional de becas para estudios de pregrado o posgrado.",
+        "description_2": "Para iniciar el proceso debes ingresar los datos correspondientes:",
+        "steps": {
+            "personal": "Personal",
+            "academic": "Académico",
+            "labor": "Laboral",
+            "references": "Referencias",
+            "documents": "Documentos"
+        },
+        "footer": "Una vez que se haya ingresado y enviado la información solicitada, nuestros asesores se pondrán en contacto contigo. Nuestro proceso de selección para los solicitantes de becas de FUNIBER tarda entre 5 y 10 días hábiles. Si tienes alguna duda o pregunta, por favor contacta a tu asesor comercial.",
+        "button": "COMENZAR"
+    },
+    "formStepper": {
+        "steps": {
+            "personal": "Personal",
+            "addresses": "Direcciones",
+            "academic": "Académico",
+            "labor": "Laboral",
+            "references": "Referencias",
+            "documents": "Documentos",
+            "Additional": "Adicional"
+        }
+    },
+    "personalData": {
+        "title": "Datos personales",
+        "sections": {
+            "basic": "1. Datos básicos",
+            "birth": "2. Datos de nacimiento",
+            "financial": "3. Datos financieros",
+            "family": "4. Datos familiares"
+        },
+        "fields": {
+            "documentType": "Tipo de documento",
+            "documentNumber": "Número de documento",
+            "documentNumberPlaceholder": "Ingrese el número de documento",
+            "maritalStatus": "Estado civil",
+            "profession": "Profesión / Ocupación",
+            "professionPlaceholder": "Ingrese la profesión",
+            "dob": "Fecha de nacimiento",
+            "country": "País",
+            "state": "Provincia/Estado",
+            "city": "Ciudad",
+            "nationality": "Nacionalidad",
+            "income": "Ingreso mensual",
+            "incomePlaceholder": "Ingrese el ingreso mensual",
+            "expense": "Gasto mensual",
+            "expensePlaceholder": "Ingrese el gasto mensual"
+        },
+        "options": {
+            "documentType": {
+                "nic": "Documento nacional de identidad",
+                "passport": "Pasaporte",
+                "foreigner": "Documento de identidad de extranjero",
+                "ruc": "RUC",
+                "other": "Otro"
+            },
+            "maritalStatus": {
+                "married": "Casado",
+                "single": "Soltero",
+                "divorced": "Divorciado",
+                "widowed": "Viudo",
+                "separated": "Separado"
+            },
+            "yes": "SÍ",
+            "no": "NO"
+        },
+        "financial": {
+            "dependent": "Dependes económicamente de tus padres u otras personas:",
+            "incomeTooltip": "Ingreso mensual estimado del hogar",
+            "expenseTooltip": "Gasto mensual estimado del hogar"
+        },
+        "family": {
+            "hasChildren": "Tiene hijos:",
+            "childrenCount": "Número de hijos por edad:",
+            "ageGroups": {
+                "0to4": "0 a 4 años",
+                "5to12": "5 a 12 años",
+                "13to18": "13 a 18 años",
+                "18plus": "+ 18 años"
+            },
+            "childrenPlaceholder": "Ingrese la cantidad"
+        },
+        "validation": {
+            "documentTypeRequired": "El documento es obligatorio",
+            "documentNumberRequired": "El número de documento es obligatorio",
+            "documentNumberMax": "La longitud máxima del número de documento es 50",
+            "maritalStatusRequired": "El estado civil es obligatorio",
+            "professionInvalid": "La profesión solo debe contener letras y espacios",
+            "dobRequired": "La fecha de nacimiento es obligatoria",
+            "countryRequired": "El país es obligatorio",
+            "stateRequired": "La provincia/estado es obligatoria",
+            "cityRequired": "La ciudad es obligatoria",
+            "nationalityRequired": "La nacionalidad es obligatoria",
+            "incomeRequired": "El ingreso es obligatorio",
+            "incomeInvalid": "El formato debe permitir hasta 2 decimales y usar ',' como separador de miles",
+            "expenseRequired": "El gasto es obligatorio",
+            "expenseInvalid": "El formato debe permitir hasta 2 decimales y usar ',' como separador de miles",
+            "childrenRequired": "Ingrese el número de hijos en al menos un grupo de edad"
+        },
+        "buttons": {
+            "back": "ATRÁS",
+            "cancel": "CANCELAR",
+            "continue": "CONTINUAR"
+        }
+    },
+    "addressData": {
+        "title": "Direcciones",
+        "sections": {
+            "contact": "1. Contacto",
+            "residence": "2. Residencia"
+        },
+        "fields": {
+            "email": "Correo electrónico",
+            "phone": "Número de teléfono",
+            "whatsapp": "WhatsApp",
+            "housingType": "Tipo de vivienda",
+            "housingConditions": "Condiciones de vivienda",
+            "country": "País de residencia",
+            "state": "Estado de residencia",
+            "city": "Ciudad de residencia",
+            "zipCode": "Código postal",
+            "address": "Dirección"
+        },
+        "options": {
+            "housingType": {
+                "House": "Casa",
+                "Department": "Departamento"
+            },
+            "housingConditions": {
+                "own": "Propia",
+                "rented": "Alquilada",
+                "family": "Familiar"
+            }
+        },
+        "buttons": {
+            "addEmail": "AGREGAR CORREO",
+            "addPhone": "AGREGAR TELÉFONO",
+            "add": "AGREGAR",
+            "cancel": "CANCELAR",
+            "delete": "ELIMINAR"
+        },
+        "placeholders": {
+            "email": "abcd@gmail.com",
+            "phone": "Número de teléfono",
+            "whatsapp": "Whatsapp",
+            "zipCode": "Código postal",
+            "address": "Dirección"
+        },
+        "labels": {
+            "optional": "Opcional"
+        },
+        "modals": {
+            "addNumber": {
+                "title": "Agregar número",
+                "phone": "Número de teléfono",
+                "whatsapp": "WhatsApp"
+            },
+            "deletePhone": {
+                "title": "Eliminar número de teléfono",
+                "message": "¿Estás seguro de que quieres eliminar el número de teléfono?"
+            },
+            "deleteEmail": {
+                "title": "Eliminar correo electrónico",
+                "message": "¿Estás seguro de que quieres eliminar el correo electrónico?"
+            }
+        },
+        "validation": {
+            "emailRequired": "El correo electrónico es obligatorio",
+            "emailInvalid": "Formato de correo electrónico inválido",
+            "phoneRequired": "El número de teléfono es obligatorio",
+            "atLeastOnePhone": "Se requiere al menos un número de teléfono",
+            "atLeastOneWhatsapp": "Se requiere al menos un número de WhatsApp",
+            "prefixRequired": "El prefijo es obligatorio",
+            "housingTypeRequired": "El tipo de vivienda es obligatorio",
+            "housingConditionsRequired": "Las condiciones de vivienda son obligatorias",
+            "countryRequired": "El país es obligatorio",
+            "stateRequired": "El estado es obligatorio",
+            "cityRequired": "La ciudad es obligatoria",
+            "zipCodeRequired": "El código postal es obligatorio",
+            "addressRequired": "La dirección es obligatoria"
+        }
+    },
+    "cancelModal": {
+        "title": "Cancelar Formulario",
+        "message": "¿Estás seguro de que quieres cancelar este formulario?",
+        "yes": "SÍ",
+        "no": "NO"
+    }
+}

@@ -27,3 +27,29 @@ export const createPersonalDetailThunk = createAsyncThunk(
     }
   }
 );
+
+interface createAddressDetail{
+    content :any,
+    application_uuid:number
+
+}
+
+export const createAddressDetailThunk = createAsyncThunk(
+  "scholarshipform/createAddressDetail",
+  async (PersonalDetail: createAddressDetail, thunkAPI) => {
+    const {content,application_uuid}= PersonalDetail
+    try {
+      const response = await axios.post(
+        `/api/addressDetail/${application_uuid}`,
+        { content },
+        {
+          withCredentials: true
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      const errorMessage = error?.response?.data || error?.message;
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+);

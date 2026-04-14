@@ -9,10 +9,14 @@ import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import {useAppSelector} from '@/hooks/use-redux-hook'
 import { useRouter } from "next/navigation";
+import { useTranslation } from 'react-i18next';
+
 
 const ScholarshipIntro = () => {
   const { currentUser } = useAppSelector((state) => state.auth)
   const router = useRouter()
+    const { t, i18n } = useTranslation();
+  
 
   return (
     <div className="page">
@@ -22,56 +26,49 @@ const ScholarshipIntro = () => {
         </div>
 
         <div className="right">
-          <h1>¡Hi, {currentUser?.first_name} {currentUser?.last_name}!</h1>
+          <h1>{t("scholarshipIntro.greeting")}, {currentUser?.first_name} {currentUser?.last_name}!</h1>
 
           <h2>
-            Welcome to the online scholarship application form
+            {t("scholarshipIntro.title")}
           </h2>
 
           <p>
-            By filling out this form you will begin the application
-            process for our international scholarship program for
-            undergraduate or graduate studies.
+            {t("scholarshipIntro.description_1")}
           </p>
 
           <p>
-            In order to start the process you must enter the
-            corresponding data:
+            {t("scholarshipIntro.description_2")}
           </p>
 
           <div className="steps">
             <div className="step">
               <span><PersonOutlineOutlinedIcon fontSize="medium" /></span>
-              <strong>Personal</strong>
+              <strong>{t("scholarshipIntro.steps.personal")}</strong>
             </div>
             <div className="step">
               <span> <SchoolOutlinedIcon fontSize="medium" /> </span>
-              <strong>Academic</strong>
+              <strong>{t("scholarshipIntro.steps.academic")}</strong>
             </div>
             <div className="step">
               <span> <BusinessCenterOutlinedIcon fontSize="medium" /> </span>
-              <strong>Labor</strong>
+              <strong>{t("scholarshipIntro.steps.labor")}</strong>
             </div>
             <div className="step">
               <span> <FolderSharedOutlinedIcon fontSize="medium" /> </span>
-              <strong>References</strong>
+              <strong>{t("scholarshipIntro.steps.references")}</strong>
             </div>
             <div className="step">
               <span> <DescriptionOutlinedIcon fontSize="medium" /> </span>
-              <strong>Documents</strong>
+              <strong>{t("scholarshipIntro.steps.documents")}</strong>
             </div>
           </div>
 
           <p className="footer-text">
-            Once the requested information has been entered and sent,
-            our advisors will contact you. Our selection process for
-            FUNIBER scholarship applicants takes between 5 to 10
-            working days. If you have any doubts or questions, please
-            contact your commercial advisor.
+            {t("scholarshipIntro.footer")}
           </p>
 
           <div className="button-container">
-            <button className="start-btn" onClick={()=>router.push('/scholarship-form-application')}>START</button>
+            <button className="start-btn" onClick={()=>router.push('/scholarship-form-application')}>{t("scholarshipIntro.button")}</button>
           </div>
         </div>
       </div>

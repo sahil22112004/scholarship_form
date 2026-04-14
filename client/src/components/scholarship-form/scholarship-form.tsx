@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import FormStepper from './stepper/form-stepper';
 import PersonalData from './steps/personal-data/personal-data';
+import Address from './steps/address/address';
 import {
     Dialog,
     DialogTitle,
@@ -13,8 +14,12 @@ import {
     Box
 } from '@mui/material';
 import './scholarship-form.css';
+import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/navigation';
 
 const ScholarshipForm = () => {
+    const router = useRouter()
+    const { t } = useTranslation();
     const [activeStep, setActiveStep] = useState(0);
     const [cancelModal, setCancelModal] = useState<boolean>(false)
     const [formData, setFormData] = useState({
@@ -43,7 +48,7 @@ const ScholarshipForm = () => {
     };
 
     const confirmCancel = () => {
-        window.location.href = '/';
+        router.push('/scholarship-intro')
     };
 
     const closeCancelModal = () => {
@@ -65,12 +70,12 @@ const ScholarshipForm = () => {
                 );
             case 1:
                 return (
-                    <div className="placeholder-step">
-                        <div className="form-header">
-                            <h2>Address data</h2>
-                        </div>
-                        <p>This section will be detailed in deliverable 2. Currently, it's a placeholder to demonstrate step advancement.</p>
-                    </div>
+                    <Address
+                        onContinue={handleContinue}
+                        onBack={handleBack}
+                        savedData={formData.address}
+                        setCancelModal={setCancelModal}
+                    />
                 );
             default:
                 return <div>Step {step + 1} content coming soon...</div>;
@@ -102,12 +107,12 @@ const ScholarshipForm = () => {
             >
                 <DialogTitle sx={{ pb: 1 }}>
                     <Typography variant="h5" sx={{ fontSize: '20px', fontWeight: 600, color: 'var(--neutral-neutral-800, #424242)' }}>
-                        Cancel Form
+                        {t("cancelModal.title")}
                     </Typography>
                 </DialogTitle>
                 <DialogContent>
                     <Typography variant="body1" sx={{ color: '#5f6368' }}>
-                        Are you sure you want to cancel this form?
+                        {t("cancelModal.message")}
                     </Typography>
                 </DialogContent>
                 <DialogActions sx={{ px: 3, pb: 2 }}>
@@ -122,7 +127,7 @@ const ScholarshipForm = () => {
 
                         }}
                     >
-                        NO
+                        {t("cancelModal.no")}
                     </Button>
                     <Button
                         onClick={confirmCancel}
@@ -135,7 +140,7 @@ const ScholarshipForm = () => {
                             
                         }}
                     >
-                        YES
+                        {t("cancelModal.yes")}
                     </Button>
                 </DialogActions>
             </Dialog>

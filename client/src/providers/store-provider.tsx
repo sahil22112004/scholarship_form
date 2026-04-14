@@ -1,5 +1,7 @@
 'use client'
 
+import "@/localise";
+
 import { ReactNode } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";

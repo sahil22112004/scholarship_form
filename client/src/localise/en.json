@@ -1,0 +1,205 @@
+{
+  "login": {
+    "title": "Log in",
+    "subtitle": "Enter the access code to continue",
+    "placeholder": "Access code",
+    "button": "LOG IN",
+    "loading": "loading",
+    "error_empty": "This Field Cannot Be Empty",
+    "language": {
+      "en": "English (USA)",
+      "es": "Spanish (Spain)"
+    }
+  },
+  "scholarshipIntro": {
+    "greeting": "Hi",
+    "title": "Welcome to the online scholarship application form",
+    "description_1": "By filling out this form you will begin the application process for our international scholarship program for undergraduate or graduate studies.",
+    "description_2": "In order to start the process you must enter the corresponding data:",
+    "steps": {
+      "personal": "Personal",
+      "academic": "Academic",
+      "labor": "Labor",
+      "references": "References",
+      "documents": "Documents"
+    },
+    "footer": "Once the requested information has been entered and sent, our advisors will contact you. Our selection process for FUNIBER scholarship applicants takes between 5 to 10 working days. If you have any doubts or questions, please contact your commercial advisor.",
+    "button": "START"
+  },
+  "formStepper": {
+    "steps": {
+      "personal": "Personal",
+      "addresses": "Addresses",
+      "academic": "Academic",
+      "labor": "Labor",
+      "references": "References",
+      "documents": "Documents",
+      "Additional": "Additional"
+    }
+  },
+  "personalData": {
+    "title": "Personal data",
+    "sections": {
+      "basic": "1. Basic data",
+      "birth": "2. Birth data",
+      "financial": "3. Financial data",
+      "family": "4. Family data"
+    },
+    "fields": {
+      "documentType": "Type of document",
+      "documentNumber": "Document number",
+      "documentNumberPlaceholder": "Enter document number",
+      "maritalStatus": "Marital status",
+      "profession": "Profession / Occupation",
+      "professionPlaceholder": "Enter profession",
+      "dob": "Date of birth",
+      "country": "Country",
+      "state": "Province/State",
+      "city": "City",
+      "nationality": "Nationality",
+      "income": "Monthly income",
+      "incomePlaceholder": "Enter monthly income",
+      "expense": "Monthly expense",
+      "expensePlaceholder": "Enter monthly expense"
+    },
+    "options": {
+      "documentType": {
+        "nic": "National identity card",
+        "passport": "Passport",
+        "foreigner": "Foreigner's identity card",
+        "ruc": "RUC",
+        "other": "Other"
+      },
+      "maritalStatus": {
+        "married": "Married",
+        "single": "Single",
+        "divorced": "Divorced",
+        "widowed": "Widowed",
+        "separated": "Separated"
+      },
+      "yes": "YES",
+      "no": "NO"
+    },
+    "financial": {
+      "dependent": "You are financially dependent on your parents or others:",
+      "incomeTooltip": "Estimated monthly income of the household",
+      "expenseTooltip": "Estimated monthly expense of the household"
+    },
+    "family": {
+      "hasChildren": "Has children:",
+      "childrenCount": "Number of children by age:",
+      "ageGroups": {
+        "0to4": "0 to 4 years",
+        "5to12": "5 to 12 years",
+        "13to18": "13 to 18 years",
+        "18plus": "+ 18 years"
+      },
+      "childrenPlaceholder": "Enter count"
+    },
+    "validation": {
+      "documentTypeRequired": "Document is required",
+      "documentNumberRequired": "Document number is required",
+      "documentNumberMax": "Maximum length for document number is 50",
+      "maritalStatusRequired": "Marital status is required",
+      "professionInvalid": "Profession must contain only letters and spaces",
+      "dobRequired": "Date of birth is required",
+      "countryRequired": "Country is required",
+      "stateRequired": "State is required",
+      "cityRequired": "City is required",
+      "nationalityRequired": "Nationality is required",
+      "incomeRequired": "Income is required",
+      "incomeInvalid": "Format should allow up to 2 decimal digits, with ',' as thousands separator",
+      "expenseRequired": "Expense is required",
+      "expenseInvalid": "Format should allow up to 2 decimal digits, with ',' as thousands separator",
+      "childrenRequired": "Enter number of children in at least one age group"
+    },
+    "buttons": {
+      "back": "BACK",
+      "cancel": "CANCEL",
+      "continue": "CONTINUE"
+    }
+  },
+  "addressData": {
+    "title": "Addresses",
+    "sections": {
+      "contact": "1. Contact",
+      "residence": "2. Residence"
+    },
+    "fields": {
+      "email": "Email",
+      "phone": "Phone number",
+      "whatsapp": "WhatsApp",
+      "housingType": "Type of housing",
+      "housingConditions": "Housing conditions",
+      "country": "Country of residence",
+      "state": "State of residence",
+      "city": "City of residence",
+      "zipCode": "Zip code",
+      "address": "Address"
+    },
+    "options": {
+      "housingType": {
+        "House": "House",
+        "Department": "Department"
+      },
+      "housingConditions": {
+        "own": "Own",
+        "rented": "Rented",
+        "family": "Family"
+      }
+    },
+    "buttons": {
+      "addEmail": "ADD EMAIL",
+      "addPhone": "ADD PHONE NUMBER",
+      "add": "ADD",
+      "cancel": "CANCEL",
+      "delete": "DELETE"
+    },
+    "placeholders": {
+      "email": "abcd@gmail.com",
+      "phone": "Phone number",
+      "whatsapp": "Whatsapp",
+      "zipCode": "Zip code",
+      "address": "Address"
+    },
+    "labels": {
+      "optional": "Optional"
+    },
+    "modals": {
+      "addNumber": {
+        "title": "Add number",
+        "phone": "Phone number",
+        "whatsapp": "WhatsApp"
+      },
+      "deletePhone": {
+        "title": "Delete Phone number",
+        "message": "Are you sure you want to Remove Phone Number?"
+      },
+      "deleteEmail": {
+        "title": "Delete email",
+        "message": "Are you sure you want to Remove Email Address?"
+      }
+    },
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email format",
+      "phoneRequired": "Phone number is required",
+      "atLeastOnePhone": "At least one phone number is required",
+      "atLeastOneWhatsapp": "At least one WhatsApp number is required",
+      "prefixRequired": "Prefix is required",
+      "housingTypeRequired": "Housing type is required",
+      "housingConditionsRequired": "Housing conditions are required",
+      "countryRequired": "Country is required",
+      "stateRequired": "State is required",
+      "cityRequired": "City is required",
+      "zipCodeRequired": "Zip code is required",
+      "addressRequired": "Address is required"
+    }
+  },
+  "cancelModal": {
+    "title": "Cancel Form",
+    "message": "Are you sure you want to cancel this form?",
+    "yes": "YES",
+    "no": "NO"
+  }
+}

@@ -31,6 +31,7 @@ import './personal-data.css';
 import Tooltip from '@mui/material/Tooltip';
 import { useAppDispatch, useAppSelector } from '@/hooks/use-redux-hook';
 import { createPersonalDetailThunk } from '@/store/features/scholarshipform/scholarshipform-api';
+import { useTranslation } from 'react-i18next';
 
 
 interface PersonalDataProps {
@@ -42,6 +43,7 @@ interface PersonalDataProps {
 }
 
 const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCancelModal, cancelModal, savedData }) => {
+    const { t } = useTranslation();
     const dispatch = useAppDispatch();
     const { ScholarshipForm, PersonalDetail } = useAppSelector((state) => state.scholarshipform)
     console.log("personak data is ", PersonalDetail)
@@ -50,7 +52,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
 
 
     const { control, handleSubmit, setValue, watch, reset, getValues, formState: { errors } } = useForm<personalInterface>({
-        resolver: zodResolver(personalSchema),
+        resolver: zodResolver(personalSchema(t)),
         defaultValues: PersonalDetail || savedData || {
             documentType: '',
             documentNumber: '',
@@ -96,7 +98,6 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
             const statesData = State.getStatesOfCountry(selectedCountry);
             setStates(statesData);
 
-            // Only clear state/city if the current values are not valid for this country
             const currentState = getValues('state');
             if (currentState && !statesData.find(s => s.isoCode === currentState)) {
                 setValue('state', '');
@@ -144,11 +145,11 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="personal-form">
             <div className="form-header">
-                <h2>Personal data</h2>
+                <h2>{t("personalData.title")}</h2>
             </div>
 
             <div className="form-section">
-                <div className="section-title">1. Basic data</div>
+                <div className="section-title">{t("personalData.sections.basic")}</div>
                 <div className="form-row">
                     <div className="form-col">
                         <Controller
@@ -156,18 +157,18 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                             control={control}
                             render={({ field }) => (
                                 <FormControl fullWidth error={!!errors.documentType} variant="outlined" className="linkedin-input-container">
-                                    <InputLabel id="document-type-label">Type of document</InputLabel>
+                                    <InputLabel id="document-type-label">{t("personalData.fields.documentType")}</InputLabel>
                                     <Select
                                         {...field}
                                         labelId="document-type-label"
                                         id="document-type-select"
-                                        label="Type of document"
+                                        label={t("personalData.fields.documentType")}
                                     >
-                                        <MenuItem value="National identity card">National identity card</MenuItem>
-                                        <MenuItem value="Passport">Passport</MenuItem>
-                                        <MenuItem value="Foreigner's identity card">Foreigner's identity card</MenuItem>
-                                        <MenuItem value="RUC">RUC</MenuItem>
-                                        <MenuItem value="Other">Other</MenuItem>
+                                        <MenuItem value="National identity card">{t("personalData.options.documentType.nic")}</MenuItem>
+                                        <MenuItem value="Passport">{t("personalData.options.documentType.passport")}</MenuItem>
+                                        <MenuItem value="Foreigner's identity card">{t("personalData.options.documentType.foreigner")}</MenuItem>
+                                        <MenuItem value="RUC">{t("personalData.options.documentType.ruc")}</MenuItem>
+                                        <MenuItem value="Other">{t("personalData.options.documentType.other")}</MenuItem>
                                     </Select>
                                     {errors.documentType && <FormHelperText>{errors.documentType.message as string}</FormHelperText>}
                                 </FormControl>
@@ -183,8 +184,8 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                                     {...field}
                                     id="document-number-input"
                                     fullWidth
-                                    label="Document number"
-                                    placeholder="Enter document number"
+                                    label={t("personalData.fields.documentNumber")}
+                                    placeholder={t("personalData.fields.documentNumberPlaceholder")}
                                     variant="outlined"
                                     className="linkedin-input-container"
                                     error={!!errors.documentNumber}
@@ -201,18 +202,18 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                             control={control}
                             render={({ field }) => (
                                 <FormControl fullWidth error={!!errors.maritalStatus} variant="outlined" className="linkedin-input-container">
-                                    <InputLabel id="marital-status-label">Marital status</InputLabel>
+                                    <InputLabel id="marital-status-label">{t("personalData.fields.maritalStatus")}</InputLabel>
                                     <Select
                                         {...field}
                                         labelId="marital-status-label"
                                         id="marital-status-select"
-                                        label="Marital status"
+                                        label={t("personalData.fields.maritalStatus")}
                                     >
-                                        <MenuItem value="Married">Married</MenuItem>
-                                        <MenuItem value="Single">Single</MenuItem>
-                                        <MenuItem value="Divorced">Divorced</MenuItem>
-                                        <MenuItem value="Widowed">Widowed</MenuItem>
-                                        <MenuItem value="Separated">Separated</MenuItem>
+                                        <MenuItem value="Married">{t("personalData.options.maritalStatus.married")}</MenuItem>
+                                        <MenuItem value="Single">{t("personalData.options.maritalStatus.single")}</MenuItem>
+                                        <MenuItem value="Divorced">{t("personalData.options.maritalStatus.divorced")}</MenuItem>
+                                        <MenuItem value="Widowed">{t("personalData.options.maritalStatus.widowed")}</MenuItem>
+                                        <MenuItem value="Separated">{t("personalData.options.maritalStatus.separated")}</MenuItem>
                                     </Select>
                                     {errors.maritalStatus && <FormHelperText>{errors.maritalStatus.message as string}</FormHelperText>}
                                 </FormControl>
@@ -227,8 +228,8 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                                 <TextField
                                     {...field}
                                     fullWidth
-                                    label="Profession / Occupation"
-                                    placeholder="Enter profession"
+                                    label={t("personalData.fields.profession")}
+                                    placeholder={t("personalData.fields.professionPlaceholder")}
                                     variant="outlined"
                                     className="linkedin-input-container"
                                     error={!!errors.profession}
@@ -245,7 +246,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
             </div>
 
             <div className="form-section">
-                <div className="section-title">2. Birth data</div>
+                <div className="section-title">{t("personalData.sections.birth")}</div>
                 <div className="form-row">
                     <div className="form-col">
                         <Controller
@@ -255,7 +256,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DateField
                                         {...restField}
-                                        label="Date of birth"
+                                        label={t("personalData.fields.dob")}
                                         value={value ? dayjs(value) : null}
                                         onChange={(newValue) => {
                                             onChange(newValue ? (newValue as any).format('YYYY-MM-DD') : '');
@@ -290,12 +291,12 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                             control={control}
                             render={({ field }) => (
                                 <FormControl fullWidth error={!!errors.country} variant="outlined" className="linkedin-input-container">
-                                    <InputLabel id="country-label">Country</InputLabel>
+                                    <InputLabel id="country-label">{t("personalData.fields.country")}</InputLabel>
                                     <Select
                                         {...field}
                                         labelId="country-label"
                                         id="country-select"
-                                        label="Country"
+                                        label={t("personalData.fields.country")}
                                     >
                                         {countries.map((c) => (
                                             <MenuItem key={c.isoCode} value={c.isoCode}>
@@ -316,12 +317,12 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                             control={control}
                             render={({ field }) => (
                                 <FormControl fullWidth error={!!errors.state} variant="outlined" className="linkedin-input-container">
-                                    <InputLabel id="state-label">Province/State</InputLabel>
+                                    <InputLabel id="state-label">{t("personalData.fields.state")}</InputLabel>
                                     <Select
                                         {...field}
                                         labelId="state-label"
                                         id="state-select"
-                                        label="Province/State"
+                                        label={t("personalData.fields.state")}
                                         disabled={!selectedCountry}
                                     >
                                         {states.map((s) => (
@@ -341,12 +342,12 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                             control={control}
                             render={({ field }) => (
                                 <FormControl fullWidth error={!!errors.city} variant="outlined" className="linkedin-input-container">
-                                    <InputLabel id="city-label">City</InputLabel>
+                                    <InputLabel id="city-label">{t("personalData.fields.city")}</InputLabel>
                                     <Select
                                         {...field}
                                         labelId="city-label"
                                         id="city-select"
-                                        label="City"
+                                        label={t("personalData.fields.city")}
                                         disabled={!selectedState}
                                     >
                                         {cities.map((c) => (
@@ -368,12 +369,12 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                             control={control}
                             render={({ field }) => (
                                 <FormControl fullWidth error={!!errors.nationality} variant="outlined" className="linkedin-input-container">
-                                    <InputLabel id="nationality-label">Nationality</InputLabel>
+                                    <InputLabel id="nationality-label">{t("personalData.fields.nationality")}</InputLabel>
                                     <Select
                                         {...field}
                                         labelId="nationality-label"
                                         id="nationality-select"
-                                        label="Nationality"
+                                        label={t("personalData.fields.nationality")}
                                     >
                                         {countries.map((c) => (
                                             <MenuItem key={c.isoCode} value={c.isoCode}>
@@ -391,7 +392,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
             </div>
 
             <div className="form-section">
-                <div className="section-title">3. Financial data</div>
+                <div className="section-title">{t("personalData.sections.financial")}</div>
                 <div className="form-row">
                     <div className="form-col">
                         <Controller
@@ -401,8 +402,8 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                                 <TextField
                                     {...field}
                                     fullWidth
-                                    label="Monthly income"
-                                    placeholder="Enter monthly income"
+                                    label={t("personalData.fields.income")}
+                                    placeholder={t("personalData.fields.incomePlaceholder")}
                                     variant="outlined"
                                     className="linkedin-input-container"
                                     error={!!errors.income}
@@ -417,7 +418,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                                                 <InputAdornment position="end">
                                                     <IconButton size="small">
                                                         <Tooltip
-                                                            title="Estimated monthly income of the household">
+                                                            title={t("personalData.financial.incomeTooltip")}>
                                                             <HelpOutlineOutlinedIcon fontSize="small" sx={{ color: '#9E9E9E' }} />
                                                         </Tooltip>
                                                     </IconButton>
@@ -437,8 +438,8 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                                 <TextField
                                     {...field}
                                     fullWidth
-                                    label="Monthly expense"
-                                    placeholder="Enter monthly expense"
+                                    label={t("personalData.fields.expense")}
+                                    placeholder={t("personalData.fields.expensePlaceholder")}
                                     variant="outlined"
                                     className="linkedin-input-container"
                                     error={!!errors.expense}
@@ -453,7 +454,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                                                 <InputAdornment position="end">
                                                     <IconButton size="small">
                                                         <Tooltip
-                                                            title="Estimated monthly expense of the household">
+                                                            title={t("personalData.financial.expenseTooltip")}>
                                                             <HelpOutlineOutlinedIcon fontSize="small" sx={{ color: '#9E9E9E' }} />
                                                         </Tooltip>
                                                     </IconButton>
@@ -467,39 +468,39 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                     </div>
                 </div>
                 <div className="radio-question-text">
-                    You are financially dependent on your parents or others:
+                    {t("personalData.financial.dependent")}
                 </div>
                 <Controller
                     name="dependent"
                     control={control}
                     render={({ field }) => (
                         <RadioGroup {...field} row className="custom-radio-group">
-                            <FormControlLabel value="yes" control={<Radio />} label="YES" />
-                            <FormControlLabel value="no" control={<Radio />} label="NO" />
+                            <FormControlLabel value="yes" control={<Radio />} label={t("personalData.options.yes")} />
+                            <FormControlLabel value="no" control={<Radio />} label={t("personalData.options.no")} />
                         </RadioGroup>
                     )}
                 />
             </div>
 
             <div className="form-section">
-                <div className="section-title">4. Family data</div>
+                <div className="section-title">{t("personalData.sections.family")}</div>
                 <div className="radio-question-text" style={{ marginTop: 0 }}>
-                    Has children:
+                    {t("personalData.family.hasChildren")}
                 </div>
                 <Controller
                     name="hasChildren"
                     control={control}
                     render={({ field }) => (
                         <RadioGroup {...field} row className="custom-radio-group">
-                            <FormControlLabel value="yes" control={<Radio />} label="YES" />
-                            <FormControlLabel value="no" control={<Radio />} label="NO" />
+                            <FormControlLabel value="yes" control={<Radio />} label={t("personalData.options.yes")} />
+                            <FormControlLabel value="no" control={<Radio />} label={t("personalData.options.no")} />
                         </RadioGroup>
                     )}
                 />
 
                 {hasChildren === 'yes' && (
                     <div className="children-count-container">
-                        <div className="radio-question-text" style={{ marginBottom: 15, marginTop: 25 }}>Number of children by age:</div>
+                        <div className="radio-question-text" style={{ marginBottom: 15, marginTop: 25 }}>{t("personalData.family.childrenCount")}</div>
                         <div className="children-grid">
                             <div className="children-grid-item">
                                 <Controller
@@ -509,8 +510,8 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                                         <TextField
                                             {...field}
                                             fullWidth
-                                            label="0 to 4 years"
-                                            placeholder="Enter count"
+                                            label={t("personalData.family.ageGroups.0to4")}
+                                            placeholder={t("personalData.family.childrenPlaceholder")}
                                             variant="outlined"
                                             className="linkedin-input-container"
                                             error={!!errors.children0to4}
@@ -531,8 +532,8 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                                         <TextField
                                             {...field}
                                             fullWidth
-                                            label="5 to 12 years"
-                                            placeholder="Enter count"
+                                            label={t("personalData.family.ageGroups.5to12")}
+                                            placeholder={t("personalData.family.childrenPlaceholder")}
                                             variant="outlined"
                                             className="linkedin-input-container"
                                             error={!!errors.children5to12}
@@ -553,8 +554,8 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                                         <TextField
                                             {...field}
                                             fullWidth
-                                            label="13 to 18 years"
-                                            placeholder="Enter count"
+                                            label={t("personalData.family.ageGroups.13to18")}
+                                            placeholder={t("personalData.family.childrenPlaceholder")}
                                             variant="outlined"
                                             className="linkedin-input-container"
                                             error={!!errors.children13to18}
@@ -575,8 +576,8 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                                         <TextField
                                             {...field}
                                             fullWidth
-                                            label="+ 18 years"
-                                            placeholder="Enter count"
+                                            label={t("personalData.family.ageGroups.18plus")}
+                                            placeholder={t("personalData.family.childrenPlaceholder")}
                                             variant="outlined"
                                             className="linkedin-input-container"
                                             error={!!errors.children18plus}
@@ -596,10 +597,10 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
             </div>
 
             <div className="personal-form-footer">
-                <button type="button" className="btn-secondary" onClick={onBack}>BACK</button>
+                <button type="button" className="btn-secondary" onClick={onBack}>{t("personalData.buttons.back")}</button>
                 <div className="footer-actions-right">
-                    <button type="button" className="btn-secondary" onClick={() => setCancelModal(true)}>CANCEL</button>
-                    <button type="submit" className="btn-primary">CONTINUE</button>
+                    <button type="button" className="btn-secondary" onClick={() => setCancelModal(true)}>{t("personalData.buttons.cancel")}</button>
+                    <button type="submit" className="btn-primary">{t("personalData.buttons.continue")}</button>
                 </div>
             </div>
         </form>

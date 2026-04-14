@@ -70,7 +70,7 @@
 
 .custom-connector .MuiStepConnector-line {
   border-left: 2px solid #eaeaf0;
-  min-height: 70px;
+  min-height: 60px;
 }
 
 .custom-connector.Mui-active .MuiStepConnector-line {
@@ -80,14 +80,3 @@
 .custom-connector.Mui-completed .MuiStepConnector-line {
   border-color: #0056b3;
 }
-
-/* .MuiStepConnector-root {
-  margin-left: 0 !important;
-  left: calc(50% - 1px);
-  position: relative;
-} */
-
-/* Align everything properly */
-/* .MuiStep-root {
-  align-items: center !important;
-} */
