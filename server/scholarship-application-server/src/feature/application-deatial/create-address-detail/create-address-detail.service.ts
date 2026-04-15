@@ -39,9 +39,9 @@ export class CreateAddressDetailService {
             content: content
         })
 
-        const savedPersonalDetail = await this.addressDetailRepository.save(createdPersonalDetail)
+        const savedAddressDetail = await this.addressDetailRepository.save(createdPersonalDetail)
 
-        return { message: 'Personal Detail Saved', persnolDetailData: savedPersonalDetail }
+        return { message: 'Personal Detail Saved', persnolDetailData: savedAddressDetail }
 
     }
 }

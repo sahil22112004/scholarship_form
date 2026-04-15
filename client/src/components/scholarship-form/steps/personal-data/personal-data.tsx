@@ -268,7 +268,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                                                 helperText: errors.dob?.message as string,
                                                 fullWidth: true,
                                                 variant: 'outlined',
-                                                className: "linkedin-input-container dob-field",
+                                                className: "dob-input-container dob-field",
                                                 slotProps: {
                                                     input: {
                                                         endAdornment: (
@@ -363,7 +363,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                     </div>
                 </div>
                 <div className="form-row">
-                    <div className="form-col" style={{ maxWidth: '49.5%' }}>
+                    <div className="form-col" style={{ maxWidth: '49%' }}>
                         <Controller
                             name="nationality"
                             control={control}
@@ -467,6 +467,9 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
                         />
                     </div>
                 </div>
+               </div>
+
+                <div className="form-section">
                 <div className="radio-question-text">
                     {t("personalData.financial.dependent")}
                 </div>

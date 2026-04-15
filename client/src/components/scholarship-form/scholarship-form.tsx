@@ -16,6 +16,7 @@ import {
 import './scholarship-form.css';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/navigation';
+import AdditionalInfoForm from './steps/additional/additional-Info';
 
 const ScholarshipForm = () => {
     const router = useRouter()
@@ -77,6 +78,11 @@ const ScholarshipForm = () => {
                         setCancelModal={setCancelModal}
                     />
                 );
+
+            case 6:
+                return(
+                    <AdditionalInfoForm/>
+                )
             default:
                 return <div>Step {step + 1} content coming soon...</div>;
         }

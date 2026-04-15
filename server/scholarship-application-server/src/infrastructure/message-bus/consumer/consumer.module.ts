@@ -10,6 +10,7 @@ import { CreateApplicationService } from "../../../feature//application-deatial/
 import { SendMailModule } from "../../node-mailer/sendMail.module";
 import { PersonalDetail } from "../../../domain/entities/personal-detail.entity";
 import { AddressDetail } from "../../../domain/entities/address-detail.entity";
+import { AdditionalInformation } from "../../../domain/entities/additional-information.entity";
 
 config()
 
@@ -23,7 +24,7 @@ config()
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Inbox,ScholarshipApplication,PersonalDetail,AddressDetail],
+      entities: [Inbox,ScholarshipApplication,PersonalDetail,AddressDetail,AdditionalInformation],
       synchronize: false,
     }),
     SendMailModule

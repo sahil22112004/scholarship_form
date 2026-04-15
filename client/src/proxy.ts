@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 
 const protectedRoutes = [
   '/scholarship-intro',
-  '/scholarship-form-application'
+  // '/scholarship-form-application'
 ]
 const publicRoutes = ['/']
 

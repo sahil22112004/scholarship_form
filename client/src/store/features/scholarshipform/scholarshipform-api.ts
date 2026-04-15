@@ -53,3 +53,23 @@ export const createAddressDetailThunk = createAsyncThunk(
     }
   }
 );
+
+export const createAddressInformationThunk = createAsyncThunk(
+  "scholarshipform/createAddressInformation",
+  async (additionalInformation: createAddressDetail, thunkAPI) => {
+    const {content,application_uuid}= additionalInformation
+    try {
+      const response = await axios.post(
+        `/api/additionalInformation/${application_uuid}`,
+        { content },
+        {
+          withCredentials: true
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      const errorMessage = error?.response?.data || error?.message;
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+);

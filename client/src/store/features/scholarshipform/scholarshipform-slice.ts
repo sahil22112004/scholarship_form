@@ -7,7 +7,8 @@ import { createPersonalDetailThunk, createAddressDetailThunk } from './scholarsh
 const initialState: Scholarship = {
     ScholarshipForm: null,
     PersonalDetail: null,
-    addressDetail : null,
+    addressDetail: null,
+    additionalInformation: null,
     loading: false,
     error: null,
 };

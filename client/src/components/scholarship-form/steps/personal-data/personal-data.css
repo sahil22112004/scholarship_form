@@ -1,3 +1,5 @@
+
+
 .form-header {
     margin-bottom: 30px;
 }
@@ -32,7 +34,6 @@
     flex: 1;
 }
 
-/* MUI TextField & Input Overrides */
 .MuiOutlinedInput-root {
     border-radius: 4px !important;
 }
@@ -42,7 +43,6 @@
     transition: border-color 0.2s;
 }
 
-/* Placeholder styling */
 .MuiInputBase-input::placeholder {
     color: var(--Neutral-Neutral-700, #616161) !important;
     opacity: 1 !important;
@@ -54,15 +54,12 @@
     font-size: 14px;
 }
 
-/* Entered text styling */
 .MuiOutlinedInput-input,
 .MuiSelect-select {
     color: black !important;
     font-size: 14px;
     padding: 12.5px 14px !important;
-    /* Balanced padding for vertical centering */
     min-height: 1.4375em;
-    /* Standard MUI height to ensure vertical alignment */
 }
 
 .MuiInputLabel-outlined {
@@ -73,15 +70,8 @@
     transform: translate(14px, -6px) scale(0.75);
 }
 
-.linkedin-input-container .Mui-focused .MuiOutlinedInput-notchedOutline {
-    border-color: #01579b !important;
-}
 
-.linkedin-input-container .MuiInputLabel-root.Mui-focused {
-    color: #01579b !important;
-}
 
-/* Radio buttons */
 .radio-question-text {
     font-size: 14px;
     font-weight: 500;
@@ -103,7 +93,6 @@
     color: #01579b !important;
 }
 
-/* Children Grid */
 .children-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -114,7 +103,6 @@
     text-align: center;
 }
 
-/* Footer */
 .personal-form-footer {
     display: flex;
     justify-content: space-between;
@@ -161,7 +149,6 @@
     color: #024d86;
 }
 
-/* Error Messages */
 .zod-error-message {
     color: #d32f2f;
     font-size: 12px;
@@ -173,7 +160,6 @@
     font-size: 11px !important;
 }
 
-/* Date Input specific */
 input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
     opacity: 0.6;

@@ -54,6 +54,20 @@ interface PhoneDetail {
 }
 
 
+interface additionalInformationType {
+  source:
+  "Google" |
+  "Facebook" |
+  "Instagram" |
+  "Referred" |
+  "Company" |
+  "Agreement" |
+  "University" |
+  "Speech" |
+  "Webinar";
+  specify: string;
+}
+
 interface addressDetailType {
   address: string;
   city: string;
@@ -70,7 +84,8 @@ interface addressDetailType {
 export interface Scholarship {
   ScholarshipForm: ScholarshipFormType | null;
   PersonalDetail: PersonalDetailType | null;
-  addressDetail: addressDetailType | null
+  addressDetail: addressDetailType | null;
+  additionalInformation : additionalInformationType | null
   loading: boolean;
   error: string | null;
 }

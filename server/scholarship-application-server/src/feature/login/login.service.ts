@@ -19,7 +19,7 @@ export class loginApplicantService {
     async loginApplicant(token: string) {
         const applicationForm = await this.scholarshipApplicationRepository.findOne({
             where: { token },
-            relations: ['personalDetail','addressDetail'],
+            relations: ['personalDetail','addressDetail','additionalInformation'],
         });
 
         if (!applicationForm) {
@@ -35,7 +35,7 @@ export class loginApplicantService {
         const applicantData = response.data.applicant;
         const access_token = await this.jwtService.signAsync(applicantData);
 
-        const { personalDetail,addressDetail, ...applicationWithoutPersonal } = applicationForm;
+        const { personalDetail,addressDetail,additionalInformation, ...applicationWithoutPersonal } = applicationForm;
 
         return {
             message: 'Application Fetch Successfully',
@@ -43,6 +43,7 @@ export class loginApplicantService {
             personalDetail: personalDetail?.content || null,
             addressDetail:addressDetail?.content || null,
             applicant: applicantData,
+            additionalInformation:additionalInformation,
             access_token
         };
     }

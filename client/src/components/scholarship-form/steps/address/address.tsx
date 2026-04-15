@@ -37,7 +37,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '@/hooks/use-redux-hook';
 import { addressSchema, addressInterface } from '../../../validation/addressSchema';
 import './address.css';
-import '../personal-data/personal-data.css';
+// import '../personal-data/personal-data.css';
 import { createAddressDetailThunk } from '@/store/features/scholarshipform/scholarshipform-api';
 
 interface AddressProps {
@@ -54,8 +54,6 @@ const Address: React.FC<AddressProps> = ({ onContinue, onBack, savedData, setCan
     const { ScholarshipForm, addressDetail } = useAppSelector((state) => state.scholarshipform)
 
 
-
-    // Dialog states
     const [addNumberDialogOpen, setAddNumberDialogOpen] = useState(false);
     const [selectedNumberType, setSelectedNumberType] = useState<'phone' | 'whatsapp'>('phone');
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
@@ -479,7 +477,6 @@ const Address: React.FC<AddressProps> = ({ onContinue, onBack, savedData, setCan
                 </DialogActions>
             </Dialog>
 
-            {/* Dialog for Deletion Confirmation */}
             <Dialog open={deleteConfirmOpen} onClose={() => setDeleteConfirmOpen(false)}>
                 <DialogTitle sx={{ fontWeight: 600 }}>
                     {deleteContext?.type === 'email' ? t("addressData.modals.deleteEmail.title") : t("addressData.modals.deletePhone.title")}
