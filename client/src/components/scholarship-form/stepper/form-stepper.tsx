@@ -24,7 +24,7 @@ interface FormStepperProps {
   onStepClick?: (step: number) => void
 }
 
-const FormStepper: React.FC<FormStepperProps> = ({ activeStep, onStepClick }) => {
+const FormStepper = ({ activeStep, onStepClick }: FormStepperProps) => {
   const { t } = useTranslation()
 
   const steps = [

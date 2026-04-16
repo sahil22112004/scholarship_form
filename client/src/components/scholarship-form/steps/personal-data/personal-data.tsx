@@ -26,7 +26,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs from 'dayjs';
-import { personalSchema, personalInterface } from '../../../validation/personalSchema';
+import { personalSchema, personalInterface } from '../../validation/personalSchema';
 import './personal-data.css';
 import Tooltip from '@mui/material/Tooltip';
 import { useAppDispatch, useAppSelector } from '@/hooks/use-redux-hook';
@@ -37,12 +37,11 @@ import { useTranslation } from 'react-i18next';
 interface PersonalDataProps {
     onContinue: (data: any) => void;
     onBack: () => void;
-    savedData?: any;
     setCancelModal: React.Dispatch<React.SetStateAction<boolean>>;
     cancelModal: boolean
 }
 
-const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCancelModal, cancelModal, savedData }) => {
+const PersonalData = ({ onContinue, onBack, setCancelModal, cancelModal }:PersonalDataProps) => {
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
     const { ScholarshipForm, PersonalDetail } = useAppSelector((state) => state.scholarshipform)
@@ -53,7 +52,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
 
     const { control, handleSubmit, setValue, watch, reset, getValues, formState: { errors } } = useForm<personalInterface>({
         resolver: zodResolver(personalSchema(t)),
-        defaultValues: PersonalDetail || savedData || {
+        defaultValues: PersonalDetail || {
             documentType: '',
             documentNumber: '',
             maritalStatus: '',
@@ -88,10 +87,10 @@ const PersonalData: React.FC<PersonalDataProps> = ({ onContinue, onBack, setCanc
     }, []);
 
     useEffect(() => {
-        if (PersonalDetail && !savedData) {
+        if (PersonalDetail) {
             reset(PersonalDetail);
         }
-    }, [PersonalDetail, savedData, reset]);
+    }, [PersonalDetail, reset]);
 
     useEffect(() => {
         if (selectedCountry) {

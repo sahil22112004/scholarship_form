@@ -43,7 +43,7 @@ export class loginApplicantService {
             personalDetail: personalDetail?.content || null,
             addressDetail:addressDetail?.content || null,
             applicant: applicantData,
-            additionalInformation:additionalInformation,
+            additionalInformation:additionalInformation?.content || null,
             access_token
         };
     }

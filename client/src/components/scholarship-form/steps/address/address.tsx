@@ -35,19 +35,17 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '@/hooks/use-redux-hook';
-import { addressSchema, addressInterface } from '../../../validation/addressSchema';
+import { addressSchema, addressInterface } from '../../validation/addressSchema';
 import './address.css';
-// import '../personal-data/personal-data.css';
 import { createAddressDetailThunk } from '@/store/features/scholarshipform/scholarshipform-api';
 
 interface AddressProps {
     onContinue: (data: any) => void;
     onBack: () => void;
-    savedData?: any;
     setCancelModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Address: React.FC<AddressProps> = ({ onContinue, onBack, savedData, setCancelModal }) => {
+const Address = ({ onContinue, onBack, setCancelModal }:AddressProps) => {
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
     const { currentUser } = useAppSelector((state) => state.auth);
@@ -61,7 +59,7 @@ const Address: React.FC<AddressProps> = ({ onContinue, onBack, savedData, setCan
 
     const { control, handleSubmit, watch, setValue, getValues, reset, formState: { errors } } = useForm<addressInterface>({
         resolver: zodResolver(addressSchema(t)),
-        defaultValues: addressDetail || savedData || {
+        defaultValues: addressDetail || {
             emails: [{ email: currentUser?.email || '' }],
             phones: [
                 { type: 'phone', prefix: '+91', number: '' },
@@ -112,13 +110,13 @@ const Address: React.FC<AddressProps> = ({ onContinue, onBack, savedData, setCan
     }, [selectedCountry, selectedState]);
 
     useEffect(() => {
-        if (addressDetail && !savedData) {
+        if (addressDetail) {
             reset(addressDetail);
         }
-    }, [addressDetail, savedData, reset]);
+    }, [addressDetail, reset]);
 
     const handleAddNumber = () => {
-        appendPhone({ type: selectedNumberType, prefix: '+91', number: '' }); 
+        appendPhone({ type: selectedNumberType, prefix: '+91', number: '' });
         setAddNumberDialogOpen(false);
     };
 

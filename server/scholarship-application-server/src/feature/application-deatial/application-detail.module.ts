@@ -7,18 +7,23 @@ import { PersonalDetail } from '../../domain/entities/personal-detail.entity';
 import { CreateAddressDetailController } from './create-address-detail/create-address-detail.controller';
 import { CreateAddressDetailService } from './create-address-detail/create-address-detail.service';
 import { AddressDetail } from '../../domain/entities/address-detail.entity';
+import { CreateAdditionalInformationController } from './create-additional-information/create-additional-information.controller';
+import { CreateAdditionalInformationService } from './create-additional-information/create-additional-information.service';
+import { AdditionalInformation } from 'src/domain/entities/additional-information.entity';
 
 
 
 @Module({
-    imports: [TypeOrmModule.forFeature([ScholarshipApplication,PersonalDetail,AddressDetail])],
+    imports: [TypeOrmModule.forFeature([ScholarshipApplication, PersonalDetail, AddressDetail,AdditionalInformation])],
     controllers: [
         CreatePersonalDetailController,
-        CreateAddressDetailController
+        CreateAddressDetailController,
+        CreateAdditionalInformationController
     ],
     providers: [
         CreatePersonalDetailService,
-        CreateAddressDetailService 
+        CreateAddressDetailService,
+        CreateAdditionalInformationService
     ],
 })
 export class PersonalDetailModule { }

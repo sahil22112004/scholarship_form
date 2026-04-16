@@ -31,7 +31,7 @@ export class CreateAdditionalInformationService {
             additionalInformation.content = content
             console.log("address is",additionalInformation)
             await this.additionalInformationRepository.save(additionalInformation)
-            return { message: 'Personal Detail Saved', persnolDetailData: additionalInformation }
+            return { message: 'Additional Information Saved', additionalInformationData: additionalInformation }
         }
 
         const createdPersonalDetail = this.additionalInformationRepository.create({
@@ -41,7 +41,7 @@ export class CreateAdditionalInformationService {
 
         const savedAdditionalInformation = await this.additionalInformationRepository.save(createdPersonalDetail)
 
-        return { message: 'Additional Information Saved', persnolDetailData: savedAdditionalInformation }
+        return { message: 'Additional Information Saved', additionalInformationData: savedAdditionalInformation }
 
     }
 }

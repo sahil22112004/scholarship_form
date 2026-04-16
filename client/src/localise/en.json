@@ -201,5 +201,46 @@
     "message": "Are you sure you want to cancel this form?",
     "yes": "YES",
     "no": "NO"
+  },
+  
+  "additionalInfo": {
+    "title": "Additional Information",
+    "question": "Where did you hear about us?",
+    "placeholder": "Please specify",
+    "validation": {
+      "required": "This field cannot be empty"
+    },
+    "buttons": {
+      "back": "BACK",
+      "cancel": "CANCEL",
+      "finish": "FINISH"
+    },
+    "options": {
+      "google": "Google",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "referred": "Referred",
+      "company": "Company",
+      "agreement": "Agreement",
+      "university": "University",
+      "speech": "Speech",
+      "webinar": "Webinar"
+    }
+  },
+  "summary": {
+    "title": "Summary",
+    "sections": {
+      "personal": "1. Personal data",
+      "addresses": "2. Addresses",
+      "additional": "7. Additional Information"
+    },
+    "terms": {
+      "text": "The <1>terms and conditions</1> must be accepted once the form is filled out, once this is done the information will be sent and processed by our advisors.",
+      "checkbox": "I have read and accept the terms and conditions"
+    },
+    "buttons": {
+      "back": "BACK",
+      "send": "SEND"
+    }
   }
 }

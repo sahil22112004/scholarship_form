@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loginWithTokenApi } from '../auth/auth-api'
 import { Scholarship } from './scholarshipform-type'
-import { createPersonalDetailThunk, createAddressDetailThunk } from './scholarshipform-api';
+import { createPersonalDetailThunk, createAddressDetailThunk,createAdditionalInformationThunk } from './scholarshipform-api';
 
 
 const initialState: Scholarship = {
@@ -31,6 +31,7 @@ const ScholarShipFormSlice = createSlice({
                 state.ScholarshipForm = action.payload.applicationForm;
                 state.PersonalDetail = action.payload.personalDetail.content
                 state.addressDetail = action.payload.addressDetail.content
+                state.additionalInformation = action.payload.additionalInformation.content
                 state.error = null;
 
             })
@@ -39,13 +40,17 @@ const ScholarShipFormSlice = createSlice({
                 state.error = action.payload;
             })
             .addCase(createPersonalDetailThunk.fulfilled, (state, action) => {
-                state.PersonalDetail = action.payload.content;
+                state.PersonalDetail = action.payload.persnolDetailData.content;
             })
             .addCase(createAddressDetailThunk.fulfilled, (state, action) => {
-                state.addressDetail = action.payload.content;
+                state.addressDetail = action.payload.addressDetailData.content;
             })
 
-    },
+            .addCase(createAdditionalInformationThunk.fulfilled, (state, action) => {
+                console.log("additional infoqqq data is ", action.payload.additionalInformationData.content)
+                state.additionalInformation = action.payload.additionalInformationData.content.content  ;
+            })
+    }, 
 });
 
 export const { } = ScholarShipFormSlice.actions;

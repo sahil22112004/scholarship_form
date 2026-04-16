@@ -201,5 +201,46 @@
         "message": "¿Estás seguro de que quieres cancelar este formulario?",
         "yes": "SÍ",
         "no": "NO"
+    },
+
+    "additionalInfo": {
+        "title": "Información adicional",
+        "question": "¿Cómo nos ha conocido?",
+        "placeholder": "Por favor especifica",
+        "validation": {
+            "required": "Este campo no puede estar vacío"
+        },
+        "buttons": {
+            "back": "ATRÁS",
+            "cancel": "Cancelar",
+            "finish": "FINALIZAR"
+        },
+        "options": {
+            "google": "Google",
+            "facebook": "Facebook",
+            "instagram": "Instagram",
+            "referred": "Referido",
+            "company": "Empresa",
+            "agreement": "Acuerdo",
+            "university": "Universidad",
+            "speech": "Conferencia",
+            "webinar": "Seminario web"
+        }
+    },
+    "summary": {
+        "title": "Resumen",
+        "sections": {
+            "personal": "1. Datos personales",
+            "addresses": "2. Direcciones",
+            "additional": "7. Información adicional"
+        },
+        "terms": {
+            "text": "Los <1>términos y condiciones</1> deben ser aceptados una vez que el formulario esté completo, una vez hecho esto la información será enviada y procesada por nuestros asesores.",
+            "checkbox": "He leído y acepto los términos y condiciones"
+        },
+        "buttons": {
+            "back": "ATRÁS",
+            "send": "ENVIAR"
+        }
     }
 }

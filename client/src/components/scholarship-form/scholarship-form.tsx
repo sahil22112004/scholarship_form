@@ -17,24 +17,15 @@ import './scholarship-form.css';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/navigation';
 import AdditionalInfoForm from './steps/additional/additional-Info';
+import Summary from './steps/summary/summary';
 
 const ScholarshipForm = () => {
     const router = useRouter()
     const { t } = useTranslation();
     const [activeStep, setActiveStep] = useState(0);
     const [cancelModal, setCancelModal] = useState<boolean>(false)
-    const [formData, setFormData] = useState({
-        personal: null,
-        address: null,
-    });
 
     const handleContinue = (data: any) => {
-        console.log('Saving data for step:', activeStep, data);
-        setFormData(prev => ({
-            ...prev,
-            [activeStep === 0 ? 'personal' : 'address']: data
-        }));
-
         setActiveStep((prev) => prev + 1);
     };
 
@@ -42,6 +33,11 @@ const ScholarshipForm = () => {
         if (activeStep > 0) {
             setActiveStep((prev) => prev - 1);
         }
+    };
+
+    const handleSend = () => {
+        console.log("Form submitted!");
+        // Here you would typically dispatch a final thunk to submit the whole form
     };
 
     const handleCancel = () => {
@@ -63,7 +59,6 @@ const ScholarshipForm = () => {
                     <PersonalData
                         onContinue={handleContinue}
                         onBack={handleBack}
-                        savedData={formData.personal}
                         setCancelModal={setCancelModal}
                         cancelModal={cancelModal}
 
@@ -74,14 +69,17 @@ const ScholarshipForm = () => {
                     <Address
                         onContinue={handleContinue}
                         onBack={handleBack}
-                        savedData={formData.address}
                         setCancelModal={setCancelModal}
                     />
                 );
 
             case 6:
-                return(
-                    <AdditionalInfoForm/>
+                return (
+                    <AdditionalInfoForm
+                        onContinue={handleContinue}
+                        onBack={handleBack}
+                        setCancelModal={setCancelModal}
+                    />
                 )
             default:
                 return <div>Step {step + 1} content coming soon...</div>;
@@ -89,13 +87,24 @@ const ScholarshipForm = () => {
     };
 
     return (
-        <div className="scholarship-form-container">
-            <div className="form-card">
-                <div className="form-sidebar">
-                    <FormStepper activeStep={activeStep} onStepClick={(step) => setActiveStep(step)} />
-                </div>
-                <div className="form-content">
-                    {renderStepContent(activeStep)}
+        <div>
+            <div className="scholarship-form-container">
+                <div className="form-card">
+                    {activeStep !== 7 && (
+                        <div className="form-sidebar">
+                            <FormStepper activeStep={activeStep} onStepClick={(step) => setActiveStep(step)} />
+                        </div>
+                    )}
+                    <div className={activeStep === 7 ? "form-content no-sidebar" : "form-content"}>
+                        {activeStep === 7 ? (
+                            <Summary
+                                onBack={handleBack}
+                                onSend={handleSend}
+                            />
+                        ) : (
+                            renderStepContent(activeStep)
+                        )}
+                    </div>
                 </div>
             </div>
             <Dialog

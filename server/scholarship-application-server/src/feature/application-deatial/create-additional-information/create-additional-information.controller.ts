@@ -3,7 +3,7 @@ import { CreateAdditionalInformationService } from './create-additional-informat
 
 
 @Controller('applications')
-export class CreateAddressDetailController {
+export class CreateAdditionalInformationController {
     constructor(private readonly CreateAdditionalInformationService: CreateAdditionalInformationService) { }
 
     @Post(':applicationId/additional-information')

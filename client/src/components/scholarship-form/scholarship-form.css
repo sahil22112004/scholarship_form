@@ -26,8 +26,16 @@
 
 .form-content {
     flex: 1;
-    padding: 40px 60px;
+    padding: 24px 24px;
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
+}
+
+.form-content::-webkit-scrollbar {
+    display: none;
+}
+
+.form-content.no-sidebar {
+    padding: 0;
 }

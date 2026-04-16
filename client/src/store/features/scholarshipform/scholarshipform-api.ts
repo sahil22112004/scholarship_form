@@ -54,8 +54,8 @@ export const createAddressDetailThunk = createAsyncThunk(
   }
 );
 
-export const createAddressInformationThunk = createAsyncThunk(
-  "scholarshipform/createAddressInformation",
+export const createAdditionalInformationThunk = createAsyncThunk(
+  "scholarshipform/createAdditionalInformation",
   async (additionalInformation: createAddressDetail, thunkAPI) => {
     const {content,application_uuid}= additionalInformation
     try {
